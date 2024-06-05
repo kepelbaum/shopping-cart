@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 
 const Home = ({ delay }) => {
     const [data, setData] = useState(null);
-    const [cart, setCart] = useState([]); /* need: id, title, image, quantity, price */
+    const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
+    const [curr, setCurr] = useState([]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -13,8 +14,57 @@ const Home = ({ delay }) => {
         }   , delay);
         }, [delay]);
 
+    function nullify() {
+        setCurr([]);
+    }
+
+    function handleSubmit(e) {
+        let id = Number(e.target.getAttribute("param"));
+        let already = cart;
+        let temp = curr;
+        let q = 1; /*default qty */
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i].id === id) {
+                q = temp[i].quantity;
+                break;
+            }
+        }
+        let toggle = 0;
+        for (let i = 0; i < already.length; i++) {
+            if (already[i].id === id) {
+                console.log(typeof(already[i].quantity), typeof(q));
+                already[i].quantity = Number(already[i].quantity) + Number(q);
+                toggle = 1;
+            }
+        }
+        if (toggle === 0) {
+            data.forEach((ele) => {
+                if (ele.id === id) {
+                    already.push({id, title: ele.title, image: ele.image, price: ele.price, quantity: q});
+                }
+            })
+        }
+        setCart(already);
+    }
+
     function handleQty (e) {
-        
+        let id = Number(e.target.getAttribute("param"));
+        let temp = curr;
+        let toggle = 0;
+        for (let i = 0; i < temp.length; i++) {
+            if (temp[i].id === id) {
+                temp[i].quantity = e.target.value;
+                toggle = 1;
+            }
+        }
+        if (toggle === 0) {
+            data.forEach((ele) => {
+                if (ele.id === id) {
+                    temp.push({id, quantity: e.target.value});
+                }
+            })
+        }
+        setCurr(temp);
     }
     return (
         (data && (
@@ -26,14 +76,11 @@ const Home = ({ delay }) => {
                         <img src={ele.image} alt={ele.title}></img>
                         <p>{ele.title.length > 20 ? ele.title.slice(0, 20)+'...' : ele.title}</p>
                         <p>{'$'}{ele.price}</p>
-                        <input placeholder='1' param={ele.id} onChange={handleQty}></input>
-                        <button className='add'>ADD TO CART</button>
+                        <input type='number' min='1' placeholder='1' param={ele.id} onChange={handleQty}></input>
+                        <button className='add' param={ele.id} onClick={handleSubmit}>ADD TO CART</button>
                         </div>
                   })}
                 </div>
-                {cart.map((ele) => {
-                    return <p>{ele.title}{': '}{ele.quantity}{'; '}</p>
-                })}
                 <div className='footer'>I'm a footer!</div>
             </div>
           )) || <h1>Loading...</h1>
