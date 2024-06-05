@@ -1,1 +1,1 @@
-# shopping-cart
+A simple shopping cart SPA made using React.
