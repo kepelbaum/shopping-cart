@@ -1,9 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
+import Cart from './Cart.jsx';
+
+export const ShopContext = createContext({
+    data: {},
+    cart: [],
+    setCart: () => {},
+});
 
 const Home = ({ delay }) => {
     const [data, setData] = useState(null);
     const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
     const [curr, setCurr] = useState([]);
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -32,7 +40,6 @@ const Home = ({ delay }) => {
         let toggle = 0;
         for (let i = 0; i < already.length; i++) {
             if (already[i].id === id) {
-                console.log(typeof(already[i].quantity), typeof(q));
                 already[i].quantity = Number(already[i].quantity) + Number(q);
                 toggle = 1;
             }
@@ -81,6 +88,9 @@ const Home = ({ delay }) => {
                         </div>
                   })}
                 </div>
+                <ShopContext.Provider value={{ cart, setCart }}>
+                  <Cart />
+                </ShopContext.Provider>
                 <div className='footer'>I'm a footer!</div>
             </div>
           )) || <h1>Loading...</h1>
