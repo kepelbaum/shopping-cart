@@ -2,27 +2,12 @@
 // import viteLogo from '/vite.svg'
 import { createContext, useEffect, useState } from 'react';
 import Home from './Home.jsx';
-import Cart from './Cart.jsx'
+import Cart from './Cart.jsx';
+import Head from './Head.jsx';
 
-export const ShopContext = createContext({
-    data: {},
-    cart: [],
-    setCart: () => {},
-})
 
 
 const App = ({ delay }) => {
-  const [data, setData] = useState(null);
-  const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
-  
-      useEffect(() => {
-      setTimeout(() => {
-          fetch("https://fakestoreapi.com/products/", { mode: "cors" })
-          .then((response) => response.json())
-          .then((response) => setData(response))
-          .catch((error) => console.error(error));
-      }   , delay);
-      }, [delay]);
 
   return (
     <Home />

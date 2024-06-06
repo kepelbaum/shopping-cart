@@ -1,26 +1,28 @@
 import { useEffect, useState, createContext, useContext } from 'react';
 import Cart from './Cart.jsx';
+import { ShopContext } from './Head.jsx';
 
-export const ShopContext = createContext({
-    data: {},
-    cart: [],
-    setCart: () => {},
-});
+// export const ShopContext = createContext({
+//     data: {},
+//     cart: [],
+//     setCart: () => {},
+// });
 
 const Home = ({ delay }) => {
-    const [data, setData] = useState(null);
-    const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
+    // const [data, setData] = useState(null);
+    // const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
     const [curr, setCurr] = useState([]);
+    const { data, cart, setCart } = useContext(ShopContext);
 
 
-    useEffect(() => {
-        setTimeout(() => {
-            fetch("https://fakestoreapi.com/products/", { mode: "cors" })
-            .then((response) => response.json())
-            .then((response) => setData(response))
-            .catch((error) => console.error(error));
-        }   , delay);
-        }, [delay]);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         fetch("https://fakestoreapi.com/products/", { mode: "cors" })
+    //         .then((response) => response.json())
+    //         .then((response) => setData(response))
+    //         .catch((error) => console.error(error));
+    //     }   , delay);
+    //     }, [delay]);
 
     function nullify() {
         setCurr([]);
@@ -82,15 +84,12 @@ const Home = ({ delay }) => {
                     return <div className='card' key={ele.id}>
                         <img src={ele.image} alt={ele.title}></img>
                         <p>{ele.title.length > 20 ? ele.title.slice(0, 20)+'...' : ele.title}</p>
-                        <p>{'$'}{ele.price}</p>
+                        <p>{'$'}{ele.price}</p> 
                         <input type='number' min='1' placeholder='1' param={ele.id} onChange={handleQty}></input>
                         <button className='add' param={ele.id} onClick={handleSubmit}>ADD TO CART</button>
                         </div>
                   })}
                 </div>
-                <ShopContext.Provider value={{ cart, setCart }}>
-                  <Cart />
-                </ShopContext.Provider>
                 <div className='footer'>I'm a footer!</div>
             </div>
           )) || <h1>Loading...</h1>
