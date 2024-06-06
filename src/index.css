@@ -101,6 +101,7 @@ img {
 .blocks {
   display: flex;
   flex-direction: column;
+  min-height: 81.5vh;
 }
 
 .horizontal {
@@ -117,17 +118,35 @@ img {
   font-weight: normal;
 }
 
-.checkout {
+.big {
+  font-size: 20px;
+}
+
+.mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 81.5vh;
+  text-wrap: wrap;
+}
+
+.checklink {
+  display: flex;
   width: 300px;
   height: 100px;
-  background-color: orange;
   align-self: center;
+}
+
+.checkout {
+  background-color: orange;
   font-weight: bold;
   font-size: 20px;
-  justify-self: center;
   margin: 20px 0;
   border: 2px solid black;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 /* .total {
@@ -181,14 +200,39 @@ img {
   align-items: center; 
   width: 100vw;
   max-width: 100%;
+  min-height: 5vh;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 1000px) {
   .grid {
     display: block;
     margin: 0 auto;
   }
   .card {
     margin-top: 20px;
+  }
+  .header {
+    font-size: 15px;
+    padding: 0;
+  }
+  .header ul {
+    gap: 50px;
+    margin-right: 100px;
+  }
+  .h1 {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 25px;
+  }
+  .mid {
+    width: 80vw;
+    gap: 20px;
+  }
+  .wrappercheckout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
   }
 }

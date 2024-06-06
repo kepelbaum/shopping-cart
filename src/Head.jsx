@@ -1,11 +1,9 @@
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import Home from './Home.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import routes from "./routes";
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext} from 'react';
 import Cart from './Cart.jsx';
+import Checkout from './Checkout.jsx';
 
 export const ShopContext = createContext({
         data: {},
@@ -17,8 +15,8 @@ export const ShopContext = createContext({
 
 const Head = ({ delay }) => {
     const [data, setData] = useState(null);
-    const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
-    const [count, setCount] = useState(1);
+    const [cart, setCart] = useState([]); /* need: id, title, image, quantity, price */
+    const [count, setCount] = useState(0);
     
     
     useEffect(() => {
@@ -36,6 +34,7 @@ const Head = ({ delay }) => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="cart" element={<Cart />} />
+                <Route path="checkout" element={<Checkout />} />
             </Routes>
         </BrowserRouter>
      </ShopContext.Provider>

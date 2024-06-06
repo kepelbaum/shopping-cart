@@ -1,37 +1,13 @@
-import { useEffect, useState, createContext, useContext } from 'react';
-import Cart from './Cart.jsx';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ShopContext } from './Head.jsx';
 
-// export const ShopContext = createContext({
-//     data: {},
-//     cart: [],
-//     setCart: () => {},
-// });
 
 const Home = ({ delay }) => {
-    // const [data, setData] = useState(null);
-    // const [cart, setCart] = useState([{id: 1, title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", quantity: 1, price: 109.95, image:"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"}]); /* need: id, title, image, quantity, price */
     const [curr, setCurr] = useState([]);
     const { data, cart, setCart, count, setCount } = useContext(ShopContext);
 
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         fetch("https://fakestoreapi.com/products/", { mode: "cors" })
-    //         .then((response) => response.json())
-    //         .then((response) => setData(response))
-    //         .catch((error) => console.error(error));
-    //     }   , delay);
-    //     }, [delay]);
-
-    // function nullify() {
-    //     setCurr([]);
-    // }
-
-    // useEffect(() => {
-        
-    // })
 
     function handleSubmit(e) {
         let id = Number(e.target.getAttribute("param"));
